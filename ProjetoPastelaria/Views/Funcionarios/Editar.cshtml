@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Editar-Funcionarios";
+}
+
+<div class="text-center">
+
+    <h1> Editar Funcionario</h1>
+
+</div>
+
+<form>
+    <div class="form-group">
+        <label for="nome">Nome Completo</label>
+        <input type="text" class="form-control" placeholder="digite seu Nome Completo">
+    </div>
+    <div class="form-group">
+        <label for="dataNasc">Data Nascimento</label>
+        <input type="date" class="form-control" placeholder="digite sua Data nascimento">
+    </div>
+    <div class="form-group">
+        <label for="telFixo">Tel Fixo</label>
+        <input type="tel" class="form-control" placeholder="11 1234567825">
+    </div>
+    <div class="form-group">
+        <label for="celular">Celular</label>
+        <input type="tel" class="form-control" placeholder="11 1234567825r">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" placeholder="digite seu Email">
+    </div>
+
+    <a role="button" class="btn btn-primary" asp-controller="Funcionarios" asp-action="Index">Voltar</a>
+    <button type="submit" class="btn btn-secondary">Alterar</button>
+</form>
