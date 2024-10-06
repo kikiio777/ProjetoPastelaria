@@ -27,17 +27,22 @@ namespace ProjetoPastelaria.Controllers
         {
             return View();
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            FuncionarioModel funcionario = _funcionarioRepositorio.ListarPorId(id);
+            return View(funcionario);
         }
-        public IActionResult ApagarConfirmacao()
+        public IActionResult ApagarConfirmacao(int id)
         {
-            return View();
+            //buscando pelo id
+            FuncionarioModel funcionario = _funcionarioRepositorio.ListarPorId(id);
+            return View(funcionario);
+           
         }
-        public IActionResult Apagar()
+        public IActionResult Apagar(int id)
         {
-            return View();
+            _funcionarioRepositorio.Apagar(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -45,6 +50,14 @@ namespace ProjetoPastelaria.Controllers
         public IActionResult Criar(FuncionarioModel funcionario)
         {
             _funcionarioRepositorio.Adicionar(funcionario);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        //pos ja serve pra atualizar  receber e cadastrar ai esse criar vai pegar dados de funcionariomodel 
+        public IActionResult Alterar(FuncionarioModel funcionario)
+        {
+            _funcionarioRepositorio.Atualizar(funcionario);
             return RedirectToAction("Index");
         }
     }

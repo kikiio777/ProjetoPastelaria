@@ -35,7 +35,16 @@ namespace ProjetoPastelaria.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Endereco")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NomeCompleto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Perfil")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelFixo")

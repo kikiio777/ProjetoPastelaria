@@ -20,6 +20,8 @@
                 <th scope="col">Tel Fixo</th>
                 <th scope="col">Celular</th>
                 <th scope="col">Email</th>
+                <th scope="col">Endereco</th>
+                <th scope="col">Perfil</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -28,20 +30,22 @@
             {
                 foreach (FuncionarioModel funcionarios in Model)
                 {
-                    <tr>
-                        <th scope="row">@funcionarios.Id</th>
-                        <td> @funcionarios.NomeCompleto</td>
-                        <td>@funcionarios.DataNasc</td>
-                        <td>@funcionarios.TelFixo</td>
-                        <td>@funcionarios.Celular</td>
-                        <td>@funcionarios.Email</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-secondary"asp-route-id="@funcionarios.Id" asp-controller="Funcionarios" asp-action="Editar">Editar</a>
-                                <a role="button" class="btn btn-danger" asp-route-id="@funcionarios.Id" asp-controller="Funcionarios" asp-action="ApagarConfirmacao">Apagar</a>
-                            </div>
-                        </td>
-                    </tr>
+            <tr>
+                <td scope="row">@funcionarios.Id</td>
+                <td> @funcionarios.NomeCompleto</td>
+                <td>@funcionarios.DataNasc</td>
+                <td>@funcionarios.TelFixo</td>
+                <td>@funcionarios.Celular</td>
+                <td>@funcionarios.Email</td>
+                <td>@funcionarios.Endereco</td>
+                <td>@funcionarios.Perfil</td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <a role="button" class="btn btn-secondary" asp-route-id="@funcionarios.Id" asp-controller="Funcionarios" asp-action="Editar">Editar</a>
+                        <a role="button" class="btn btn-danger" asp-route-id="@funcionarios.Id" asp-controller="Funcionarios" asp-action="ApagarConfirmacao">Apagar</a>
+                    </div>
+                </td>
+            </tr>
                 }
             }
 

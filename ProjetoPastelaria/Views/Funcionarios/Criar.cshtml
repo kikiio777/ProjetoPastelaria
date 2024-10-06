@@ -28,7 +28,22 @@
     </div>
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email"asp-for="Email" class="form-control" placeholder="digite seu Email">
+        <input type="email" asp-for="Email" class="form-control" placeholder="digite seu Email">
+    </div>
+    <div class="form-group">
+        <label for="perfil">Perfil</label>
+        <select class="form-control" name="perfil">
+            <option value="1">Admin</option>
+            <option value="2">Padrao</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="endereco">Endereço</label>
+        <input type="text" asp-for="Endereco" class="form-control" placeholder="digite o endereço">
+    </div>
+    <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control">
     </div>
 
     <a role="button" class="btn btn-secondary" asp-controller="Funcionarios" asp-action="Index">Voltar</a>

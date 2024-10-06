@@ -14,7 +14,8 @@ namespace ProjetoPastelaria.Models
         public string TelFixo { get; set; }
         public string Celular { get; set; }
         public string Email { get; set; }
-
-
+        public string Endereco { get; set; }
+        public string Perfil { get; set; }
+        public string Senha { get; set; }
     }
 }

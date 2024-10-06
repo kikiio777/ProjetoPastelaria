@@ -10,8 +10,8 @@ using ProjetoPastelaria.Data;
 namespace ProjetoPastelaria.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20241005201509_CriandoTabelaFuncionarios")]
-    partial class CriandoTabelaFuncionarios
+    [Migration("20241006180812_CriandonuLable")]
+    partial class CriandonuLable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,16 @@ namespace ProjetoPastelaria.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Endereco")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NomeCompleto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Perfil")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelFixo")
