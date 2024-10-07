@@ -14,22 +14,27 @@
     <div class="form-group">
         <label for="nome">Nome Completo</label>
         <input type="text" asp-for="NomeCompleto" class="form-control" placeholder="digite seu Nome Completo">
+        @Html.ValidationMessageFor(x => x.NomeCompleto)
     </div>
     <div class="form-group">
         <label for="dataNasc">Data Nascimento</label>
         <input type="date" asp-for="DataNasc" class="form-control" placeholder="digite sua Data nascimento">
+        @Html.ValidationMessageFor(x => x.DataNasc)
     </div>
     <div class="form-group">
         <label for="telFixo">Tel Fixo</label>
         <input type="tel" asp-for="TelFixo" class="form-control" placeholder="11 1234567825">
+        @Html.ValidationMessageFor(x => x.TelFixo)
     </div>
     <div class="form-group">
         <label for="celular">Celular</label>
         <input type="tel" asp-for="Celular" class="form-control" placeholder="11 1234567825r">
+        @Html.ValidationMessageFor(x => x.Celular)
     </div>
     <div class="form-group">
         <label for="email">Email</label>
         <input type="email" asp-for="Email" class="form-control" placeholder="digite seu Email">
+        @Html.ValidationMessageFor(x => x.Email)
     </div>
     <div class="form-group">
         <label for="perfil">Perfil</label>
@@ -39,6 +44,7 @@
     <div class="form-group">
         <label for="endereco">Endereço</label>
         <input type="text" asp-for="Endereco" class="form-control" placeholder="digite seu endereco">
+        @Html.ValidationMessageFor(x => x.Endereco)
     </div>
 
     <a role="button" class="btn btn-primary" asp-controller="Funcionarios" asp-action="Index">Voltar</a>

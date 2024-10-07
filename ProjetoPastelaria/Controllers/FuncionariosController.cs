@@ -41,24 +41,60 @@ namespace ProjetoPastelaria.Controllers
         }
         public IActionResult Apagar(int id)
         {
-            _funcionarioRepositorio.Apagar(id);
-            return RedirectToAction("Index");
+            try
+            {
+              bool apagado = _funcionarioRepositorio.Apagar(id);
+
+                if(apagado)
+                {
+                    TempData["MensagemSucesso"] = "Funcionario apagado com sucesso";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Ops, não conseguimos apagar  funcionario !";
+                }
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception erro )
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos apagar  funcionario ! mais detalhes:{erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         //pos ja serve pra atualizar  receber e cadastrar ai esse criar vai pegar dados de funcionariomodel 
         public IActionResult Criar(FuncionarioModel funcionario)
         {
-            _funcionarioRepositorio.Adicionar(funcionario);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _funcionarioRepositorio.Adicionar(funcionario);
+                    TempData["MensagemSucesso"] = "Funcionario cadastrado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View(funcionario);
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"não conseguimos cadastrar o Funcionario !, detalhe do erro:{erro.Message}";
+                return RedirectToAction("Index");
+
+             
+            }
         }
 
         [HttpPost]
         //pos ja serve pra atualizar  receber e cadastrar ai esse criar vai pegar dados de funcionariomodel 
         public IActionResult Alterar(FuncionarioModel funcionario)
         {
+            //if (!ModelState.IsValid)
+            // {
             _funcionarioRepositorio.Atualizar(funcionario);
             return RedirectToAction("Index");
+            // }     
+
         }
     }
 }
