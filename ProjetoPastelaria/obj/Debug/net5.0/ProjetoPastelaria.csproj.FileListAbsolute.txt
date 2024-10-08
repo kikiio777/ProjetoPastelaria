@@ -394,3 +394,4 @@ C:\Users\douglas reis\Desktop\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net5
 C:\Users\douglas reis\Desktop\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net5.0\ref\ProjetoPastelaria.dll
 C:\Users\douglas reis\Desktop\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net5.0\ProjetoPastelaria.pdb
 C:\Users\douglas reis\Desktop\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net5.0\ProjetoPastelaria.genruntimeconfig.cache
+C:\Users\douglas reis\Desktop\ProjetoPastelaria\ProjetoPastelaria\obj\Debug\net5.0\Razor\Views\Shared\Components\Menu\Default.cshtml.g.cs

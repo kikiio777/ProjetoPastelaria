@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoPastelaria.Helpers;
 using ProjetoPastelaria.Models;
 using ProjetoPastelaria.Repositorio;
 using System;
@@ -11,15 +12,26 @@ namespace ProjetoPastelaria.Controllers
     public class LoginController : Controller
     {
         private readonly IFuncionarioRepositorio _funcionarioRepositorio;
-        public LoginController(IFuncionarioRepositorio funcionarioRepositorio)
+        private readonly ISessao _sessao;
+        public LoginController(IFuncionarioRepositorio funcionarioRepositorio, ISessao sessao)
         {
             _funcionarioRepositorio = funcionarioRepositorio;
+            _sessao = sessao;
         }
         public IActionResult Index()
         {
+            //se o usuario ja tiver logado  , redirecionar paraa a home
+            if (_sessao.BuscarSessaoDoUsuario() != null) return RedirectToAction("Index", "Home");
+                               
             return View();
         }
 
+
+        public IActionResult Sair()
+        {
+            _sessao.RemoverSessaoDoUsuario();
+            return RedirectToAction("Index", "Login");
+        }
         [HttpPost]
          public IActionResult Entrar(LoginModel loginmodel)
          {
@@ -33,7 +45,8 @@ namespace ProjetoPastelaria.Controllers
                     if(funcionario != null)
                     {
                      if(funcionario.SenhaValida(loginmodel.Senha))
-                        {
+                        {//criando sessao do usuario como paramentro o usuario que esta sendo logado
+                            _sessao.CriarSessaoDoUsuario(funcionario);
                             return RedirectToAction("Index", "Home");
                         }
                         TempData["MensagemErro"] = "Senha usuario invalida !";

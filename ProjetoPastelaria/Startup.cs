@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjetoPastelaria.Data;
+using ProjetoPastelaria.Helpers;
 using ProjetoPastelaria.Repositorio;
 using System;
 using System.Collections.Generic;
@@ -33,8 +35,17 @@ namespace ProjetoPastelaria
                 //sistema lamba e use sql server e dentro espera uma string conection o get ´pra pegar a conceton e o nome dela
                 .AddDbContext<BancoContext>(o =>o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
             //toda vez que a injeção de dependencia  IFuncionarioRepositorio for chamada vai resolver vai usar tudo  de funcionariorepositorio
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<IFuncionarioRepositorio, FuncionarioRepositorio>();
+            services.AddScoped<ISessao, Sessao>();
             services.AddScoped<ITarefasRepositorio, TarefasRepositorio>();
+            //adicionando sessao
+            services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            });
 
         }
 
@@ -54,6 +65,8 @@ namespace ProjetoPastelaria
             app.UseRouting();
 
             app.UseAuthorization();
+            //usar sesseion
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
