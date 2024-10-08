@@ -14,45 +14,46 @@
 <form asp-controller="Funcionarios" asp-action="Criar" method="post">
     <div class="form-group">
         <label for="nome">Nome Completo</label>
-        <input type="text" asp-for="Nome" class="form-control" placeholder="digite seu Nome">
+        <input type="text" name="Nome" asp-for="Nome" class="form-control" placeholder="digite seu Nome"  required />
         @Html.ValidationMessageFor(x => x.Nome)
     </div>
     <div class="form-group">
         <label for="dataNasc">Data Nascimento</label>
-        <input type="date" asp-for="DataNasc" class="form-control" placeholder="digite sua Data nascimento">
+        <input type="date"name="DataNasc"  asp-for="DataNasc" class="form-control" placeholder="digite sua Data nascimento"required />
         @Html.ValidationMessageFor(x => x.DataNasc)
     </div>
     <div class="form-group">
         <label for="telFixo">Tel Fixo</label>
-        <input type="tel" asp-for="TelFixo" class="form-control" placeholder="11 1234567825">
+        <input type="tel"  name="TelFixo"asp-for="TelFixo" class="form-control" placeholder="11 1234567825"required />
         @Html.ValidationMessageFor(x => x.TelFixo)
     </div>
     <div class="form-group">
         <label for="celular">Celular</label>
-        <input type="tel" asp-for="Celular" class="form-control" placeholder="11 1234567825r">
+        <input type="text" name="Celular" asp-for="Celular" class="form-control" placeholder="11 1234567825r"required />
         @Html.ValidationMessageFor(x => x.Celular)
     </div>
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" asp-for="Email" class="form-control" placeholder="digite seu Email">
+        <input type="email" asp-for="Email" class="form-control" placeholder="digite seu Email"required />
         @Html.ValidationMessageFor(x => x.Email)
     </div>
     <div class="form-group">
         <label for="perfil">Perfil</label>
-        <select class="form-control" name="Perfil">
+        <select asp-for="Perfil" class="form-control" />
             <option value="0">Selecione</option>
             <option value="@PerfilEnum.Admin">Admin</option>
             <option value="@PerfilEnum.padrao">Padrao</option>
         </select>
+        @Html.ValidationMessageFor(x => x.Perfil)
     </div>
     <div class="form-group">
         <label for="endereco">Endereço</label>
-        <input type="text" asp-for="Endereco" class="form-control" placeholder="digite o endereço">
+        <input type="text" name="Endereco" asp-for="Endereco" class="form-control" placeholder="digite o endereço"required />
         @Html.ValidationMessageFor(x => x.Endereco)
     </div>
     <div class="form-group">
         <label for="senha">Senha</label>
-        <input type="password" asp-for="Senha" class="form-control">
+        <input type="password"name="Senha" asp-for="Senha" class="form-control"required />
         @Html.ValidationMessageFor(x => x.Senha)
     </div>
 

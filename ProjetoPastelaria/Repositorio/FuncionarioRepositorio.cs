@@ -16,6 +16,13 @@ namespace ProjetoPastelaria.Repositorio
             _bancoContext = bancocontext;
         }
 
+        public FuncionarioModel BuscarPLogin(string login)
+            //esse to upper serve paara evitar erros de case sensitive  ai dest jeito ele sempre compara  maiusculo com maiusculo
+        {
+            return _bancoContext.Funcionarios.FirstOrDefault(x=>x.Email.ToUpper() == login.ToUpper());
+
+        }
+
         public FuncionarioModel ListarPorId(int id)
         {
             return _bancoContext.Funcionarios.FirstOrDefault(x=>x.IdFuncionario == id);

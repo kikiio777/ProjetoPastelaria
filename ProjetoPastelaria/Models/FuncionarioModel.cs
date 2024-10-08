@@ -30,6 +30,7 @@ namespace ProjetoPastelaria.Models
         [Required(ErrorMessage = "Digite um Endereço!")]
         public string Endereco { get; set; }
 
+        [Required(ErrorMessage = "Escolha um perfil !")]
         public PerfilEnum Perfil { get; set; }
 
         [Required(ErrorMessage = "Digite uma Senha!")]
@@ -37,5 +38,12 @@ namespace ProjetoPastelaria.Models
 
         // Relação 1:N com Tarefas
         public virtual ICollection<TarefasModel> Tarefas { get; set; } = new List<TarefasModel>();
+
+        //metodo pra validar senha  se a Senha que foi criada do usuario for igual a digitada para o acesso return true
+        public  bool SenhaValida(string senha)
+        {
+            return Senha == senha;
+        }
+
     }
 }

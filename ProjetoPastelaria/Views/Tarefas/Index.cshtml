@@ -35,7 +35,9 @@
                 <th scope="col">#</th>
                 @*<th scope="col">Id</th>*@
                 <th scope="col">Descricao</th>
-                <th scope="col">DataVencimento</th>
+                <th scope="col">DataCriacao</th>
+                <th scope="col">PrazoConclusao</th>
+                <th scope="col">CriadorTarefa</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -47,7 +49,9 @@
             <tr>
                 <td scope="row">@tarefas.IdTarefa</td>
                 <td scope="row">@tarefas.Descricao</td>
+                <td scope="row">@tarefas.DataCriacao</td>
                 <td scope="row">@tarefas.PrazoConclusao</td>
+                <td scope="row">@tarefas.IdCriadorTarefa</td>
                 <td>
                     <div class="btn-group" role="group">
                         <a role="button" class="btn btn-secondary" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="Editar">Editar</a>

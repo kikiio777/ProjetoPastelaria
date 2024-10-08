@@ -40,6 +40,7 @@
         <label for="perfil">Perfil</label>
         <select class="form-control" asp-for="Perfil" asp-items="@(new SelectList(new List<string> { "Admin", "Padrao" }))">
         </select>
+        @Html.ValidationMessageFor(x => x.Perfil)
     </div>
     <div class="form-group">
         <label for="endereco">Endereço</label>

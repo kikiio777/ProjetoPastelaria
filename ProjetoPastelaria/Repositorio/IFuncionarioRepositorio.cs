@@ -8,7 +8,7 @@ namespace ProjetoPastelaria.Repositorio
 {
     public interface IFuncionarioRepositorio
     {
-
+        FuncionarioModel BuscarPLogin(string login);
         FuncionarioModel ListarPorId(int id);
         //criar  crontrato pra listar os dados
         List<FuncionarioModel> BuscarTodos();
