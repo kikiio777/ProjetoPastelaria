@@ -1,18 +1,31 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoPastelaria.Models
 {
     public class TarefasModel
     {
-        public int TarefaId { get; set; }
+        [Key]
+        public int IdTarefa { get; set; }
+
+        [Required(ErrorMessage = "Selecione um Funcionário!")]
+        public int IdFuncionario { get; set; }
+
+        [Required(ErrorMessage = "Digite a Descrição da Tarefa")]
         public string Descricao { get; set; }
-        public DateTime? DataVencimento { get; set; }
-        //chave estrangeira do func
-        public int Id { get; set; }
-        //navegação para o funcionario
-        public virtual FuncionarioModel Funcionario { get; set; }
+
+        public DateTime DataCriacao { get; set; } = DateTime.Now;
+
+        [Required(ErrorMessage = "Informe o Prazo para a Tarefa")]
+        public DateTime? PrazoConclusao { get; set; }
+
+        public int IdCriadorTarefa { get; set; }
+
+        // Essa propriedade deve ser apenas para a lista de seleção
+        [NotMapped]
+        public List<SelectListItem> Funcionarios { get; set; } // Mantenha esta como List<SelectListItem>
     }
 }

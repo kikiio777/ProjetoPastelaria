@@ -1,47 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using ProjetoPastelaria.Enum;
 
 namespace ProjetoPastelaria.Models
 {
     public class FuncionarioModel
     {
-        //id do usuario  sendo gerando sequencialmente 
-        public int Id { get; set; }
+        [Key]
+        public int IdFuncionario { get; set; }
 
+        [Required(ErrorMessage = "Digite o Nome!")]
+        public string Nome { get; set; }
 
-       [Required(ErrorMessage ="Digite o Nome !")]
-        public string NomeCompleto { get; set; }
-
-       [Required(ErrorMessage = "digite a Data de nascimento !")]
+        [Required(ErrorMessage = "Digite a Data de Nascimento!")]
         public DateTime DataNasc { get; set; }
 
-        [Required(ErrorMessage = "digite o telefone !")]
-        public string TelFixo  { get; set; }
+        [Required(ErrorMessage = "Digite o Telefone!")]
+        public string TelFixo { get; set; }
 
-
-        [Required(ErrorMessage = "Digite o celular !")]
-        [Phone(ErrorMessage ="celular nao é valido !")]
+        [Required(ErrorMessage = "Digite o Celular!")]
+        [Phone(ErrorMessage = "Celular não é válido!")]
         public string Celular { get; set; }
 
-
-       [Required(ErrorMessage = "digite o email !")]
-       [EmailAddress(ErrorMessage ="digite um email valido !")]
+        [Required(ErrorMessage = "Digite o Email!")]
+        [EmailAddress(ErrorMessage = "Digite um Email válido!")]
         public string Email { get; set; }
 
-
-       [Required(ErrorMessage = "digite um endereço!")]
+        [Required(ErrorMessage = "Digite um Endereço!")]
         public string Endereco { get; set; }
 
+        public PerfilEnum Perfil { get; set; }
 
-        public string Perfil { get; set; }
-
-
-        [Required(ErrorMessage = "Digite uma senha !")]
+        [Required(ErrorMessage = "Digite uma Senha!")]
         public string Senha { get; set; }
 
-        public virtual ICollection<TarefasModel> Tarefas { get; set; }
+        // Relação 1:N com Tarefas
+        public virtual ICollection<TarefasModel> Tarefas { get; set; } = new List<TarefasModel>();
     }
 }

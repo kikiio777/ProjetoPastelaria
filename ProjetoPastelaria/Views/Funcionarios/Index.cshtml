@@ -33,8 +33,8 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nome Completo</th>
-                <th scope="col">Data Nascimento</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Data Nasc</th>
                 <th scope="col">Tel Fixo</th>
                 <th scope="col">Celular</th>
                 <th scope="col">Email</th>
@@ -49,8 +49,8 @@
                 foreach (FuncionarioModel funcionarios in Model)
                 {
                     <tr>
-                        <td scope="row">@funcionarios.Id</td>
-                        <td> @funcionarios.NomeCompleto</td>
+                        <td scope="row">@funcionarios.IdFuncionario</td>
+                        <td> @funcionarios.Nome</td>
                         <td>@funcionarios.DataNasc</td>
                         <td>@funcionarios.TelFixo</td>
                         <td>@funcionarios.Celular</td>
@@ -59,8 +59,8 @@
                         <td>@funcionarios.Perfil</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a role="button" class="btn btn-secondary" asp-route-id="@funcionarios.Id" asp-controller="Funcionarios" asp-action="Editar">Editar</a>
-                                <a role="button" class="btn btn-danger" asp-route-id="@funcionarios.Id" asp-controller="Funcionarios" asp-action="ApagarConfirmacao">Apagar</a>
+                                <a role="button" class="btn btn-secondary" asp-route-id="@funcionarios.IdFuncionario" asp-controller="Funcionarios" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@funcionarios.IdFuncionario" asp-controller="Funcionarios" asp-action="ApagarConfirmacao">Apagar</a>
                             </div>
                         </td>
                     </tr>

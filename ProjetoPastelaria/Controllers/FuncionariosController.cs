@@ -65,24 +65,9 @@ namespace ProjetoPastelaria.Controllers
         [HttpPost]
         //pos ja serve pra atualizar  receber e cadastrar ai esse criar vai pegar dados de funcionariomodel 
         public IActionResult Criar(FuncionarioModel funcionario)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
+        {                          
                     _funcionarioRepositorio.Adicionar(funcionario);
-                    TempData["MensagemSucesso"] = "Funcionario cadastrado com sucesso";
-                    return RedirectToAction("Index");
-                }
-                return View(funcionario);
-            }
-            catch (System.Exception erro)
-            {
-                TempData["MensagemErro"] = $"não conseguimos cadastrar o Funcionario !, detalhe do erro:{erro.Message}";
-                return RedirectToAction("Index");
-
-             
-            }
+                    return RedirectToAction("Index");            
         }
 
         [HttpPost]

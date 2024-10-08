@@ -18,7 +18,7 @@ namespace ProjetoPastelaria.Repositorio
 
         public FuncionarioModel ListarPorId(int id)
         {
-            return _bancoContext.Funcionarios.FirstOrDefault(x=>x.Id == id);
+            return _bancoContext.Funcionarios.FirstOrDefault(x=>x.IdFuncionario == id);
         }
         public List<FuncionarioModel> BuscarTodos()
         {
@@ -36,11 +36,11 @@ namespace ProjetoPastelaria.Repositorio
 
        public FuncionarioModel Atualizar(FuncionarioModel funcionario)
         {
-            FuncionarioModel funcionarioDB = ListarPorId(funcionario.Id);
+            FuncionarioModel funcionarioDB = ListarPorId(funcionario.IdFuncionario);
 
             if (funcionarioDB == null) throw new Exception("Houve Um erro na alteração do funcionario");
 
-            funcionarioDB.NomeCompleto = funcionario.NomeCompleto;
+            funcionarioDB.Nome = funcionario.Nome;
             funcionarioDB.DataNasc = funcionario.DataNasc;
             funcionarioDB.TelFixo = funcionario.TelFixo;
             funcionarioDB.Celular = funcionario.Celular;

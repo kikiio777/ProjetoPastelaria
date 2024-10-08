@@ -1,0 +1,30 @@
+﻿@model TarefasModel
+@{
+    ViewData["Title"] = "Cadastrar Tarefa";
+}
+
+<div class="text-center">
+    <h1>Cadastrar Tarefa</h1>
+</div>
+
+<form asp-controller="Tarefas" asp-action="Criar" method="post">
+    <div class="form-group">
+        <label for="funcionarioId">Funcionário</label>
+        <select asp-for="IdFuncionario" class="form-control" id="funcionarioId" asp-items="Model.Funcionarios">
+            <option value="">Selecione um funcionário</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" asp-for="Descricao" class="form-control" placeholder="Descrição da tarefa">
+        @Html.ValidationMessageFor(x => x.Descricao)
+    </div>
+    <div class="form-group">
+        <label for="prazoConclusao">Data de Vencimento</label>
+        <input type="date" asp-for="PrazoConclusao" class="form-control" placeholder="Prazo da tarefa">
+        @Html.ValidationMessageFor(x => x.PrazoConclusao)
+    </div>
+
+    <a role="button" class="btn btn-secondary" asp-controller="Tarefas" asp-action="Index">Voltar</a>
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+</form>

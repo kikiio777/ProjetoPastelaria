@@ -1,6 +1,12 @@
 ﻿
 $(document).ready(function () {
-    $('#table-contatos').DataTable({
+    getDatatable('#table-contatos');
+    getDatatable('#table-tarefas');
+});
+
+
+function getDatatable(id) {
+    $(id).DataTable({
         "ordering": true,
         "paging": true,
         "searching": true,
@@ -28,8 +34,7 @@ $(document).ready(function () {
             }
         }
     });
-});
-
+}
 
 //função pra fechar (esconder a mensagem sucesso ou erro)
 $('.close-alert').click(function () {
