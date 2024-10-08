@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoPastelaria.Filters;
 using ProjetoPastelaria.Models;
 using ProjetoPastelaria.Repositorio;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoPastelaria.Controllers
 {
+    [PaginaAdmin]
+
     public class FuncionariosController : Controller
     {
         //injeção de dependencia de ifuncionario

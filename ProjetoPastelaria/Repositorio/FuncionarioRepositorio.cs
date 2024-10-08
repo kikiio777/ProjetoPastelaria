@@ -36,6 +36,7 @@ namespace ProjetoPastelaria.Repositorio
             //gravar no banco de dados porem quem grava e o contexto intt temos que injetar o contexto
             //chamar qual tabela e adiciona o funcionario
             //inserindo no banco a adição de um novo funcionario
+            funcionario.SetSenhaHash();
             _bancoContext.Funcionarios.Add(funcionario);
             _bancoContext.SaveChanges();
             return funcionario;

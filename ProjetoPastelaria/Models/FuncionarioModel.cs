@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ProjetoPastelaria.Enum;
+using ProjetoPastelaria.Helpers;
 
 namespace ProjetoPastelaria.Models
 {
@@ -42,8 +43,12 @@ namespace ProjetoPastelaria.Models
         //metodo pra validar senha  se a Senha que foi criada do usuario for igual a digitada para o acesso return true
         public  bool SenhaValida(string senha)
         {
-            return Senha == senha;
+            return Senha == senha.GerarHash();
         }
 
+        public void SetSenhaHash()
+        {
+            Senha = Senha.GerarHash();
+        }
     }
 }

@@ -4,12 +4,17 @@
 }
 
 <div class="text-center">
-    @*comando utilizado pra colocar o botao criar no canto esquerdo*@
-    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a class="btn btn-primary" role="button" asp-controller="Tarefas" asp-action="Criar">Adicionar nova Tarefa</a>
-    </div>
-    <br />
+    @if (ViewBag.PerfilUsuarioLogado != null)
+    {
+        var perfilUsuario = ViewBag.PerfilUsuarioLogado.ToString();
 
+        if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.Admin.ToString())
+        {
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a class="btn btn-primary" role="button" asp-controller="Tarefas" asp-action="Criar">Cadastrar</a>
+            </div>}
+         }
+    <br />
     @if (TempData["MensagemSucesso"] != null)
     {
         <div class="alert alert-success" role="alert">
@@ -32,12 +37,10 @@
     <table class="table" id="table-tarefas">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                @*<th scope="col">Id</th>*@
                 <th scope="col">Descricao</th>
                 <th scope="col">DataCriacao</th>
                 <th scope="col">PrazoConclusao</th>
-                <th scope="col">CriadorTarefa</th>
+                <th scope="col">TotalTarefas</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -46,26 +49,40 @@
             {
                 foreach (TarefasModel tarefas in Model)
                 {
-            <tr>
-                <td scope="row">@tarefas.IdTarefa</td>
-                <td scope="row">@tarefas.Descricao</td>
-                <td scope="row">@tarefas.DataCriacao</td>
-                <td scope="row">@tarefas.PrazoConclusao</td>
-                <td scope="row">@tarefas.IdCriadorTarefa</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <a role="button" class="btn btn-secondary" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-danger" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="ApagarConfirmacao">Apagar</a>
-                    </div>
-                </td>
-            </tr>
+                    <tr>
+                        <td scope="row">@tarefas.Descricao</td>
+                        <td scope="row">@tarefas.DataCriacao</td>
+                        <td scope="row">@tarefas.PrazoConclusao</td>
+                        <td>
+                            <a href="javascript:" class="btn btn-success btn-sm btn-total-tarefas">10</a>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                @* Aqui, verifique o perfil do usuário *@
+                                @if (ViewBag.PerfilUsuarioLogado != null)
+                                {
+                                    var perfilUsuario = ViewBag.PerfilUsuarioLogado.ToString();
+
+                                    if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.Admin.ToString())
+                                    {@* Botões visíveis apenas para Admin *@
+                                    <a role="button" class="btn btn-secondary" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="Editar">Editar</a>
+                                    <a role="button" class="btn btn-danger" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="ApagarConfirmacao">Apagar</a> }
+                                else if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.padrao.ToString())
+                                { @* Form para concluir a tarefa *@
+                                @using (Html.BeginForm("Concluir", "Tarefas", FormMethod.Post))
+                                {
+                                    @Html.Hidden("id", tarefas.IdTarefa)
+                                    <button type="submit" class="btn btn-success">Concluir</button>}}
+                        }
+                            </div>
+                        </td>
+                    </tr>
                 }
             }
             else
             {
-                <tr class="add"><td valign="top" colspan="5">Nenhuma Tarefa Encontrada</td></tr>
+                <tr class="add"><td valign="top" colspan="6">Nenhuma Tarefa Encontrada</td></tr>
             }
-
         </tbody>
     </table>
 </div>
