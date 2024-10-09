@@ -86,9 +86,6 @@ namespace ProjetoPastelaria.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FuncionarioModelIdFuncionario")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdCriadorTarefa")
                         .HasColumnType("int");
 
@@ -101,7 +98,7 @@ namespace ProjetoPastelaria.Migrations
 
                     b.HasKey("IdTarefa");
 
-                    b.HasIndex("FuncionarioModelIdFuncionario");
+                    b.HasIndex("IdFuncionario");
 
                     b.ToTable("Tarefas");
                 });
@@ -110,7 +107,9 @@ namespace ProjetoPastelaria.Migrations
                 {
                     b.HasOne("ProjetoPastelaria.Models.FuncionarioModel", null)
                         .WithMany("Tarefas")
-                        .HasForeignKey("FuncionarioModelIdFuncionario");
+                        .HasForeignKey("IdFuncionario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjetoPastelaria.Models.FuncionarioModel", b =>

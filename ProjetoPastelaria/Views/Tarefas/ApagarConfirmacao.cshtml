@@ -7,8 +7,8 @@
     <h3> Realmente deseja apagar a tarefa (@Model.Descricao) ?</h3>
 </div>
 <br />
-<br />
-<a class="btn btn-danger btn-block" role="button"asp-controller="Tarefas" asp-route-id="@Model.IdTarefa" asp-action="Apagar">Apagar</a>
-<a class="btn btn-secondary btn-block" role="button" asp-controller="Tarefas" asp-action="Index">Cancelar </a>
+<br />                                                                                  @*pegando o id da tarefa pra apagar*@
+<a class="btn btn-outline-danger btn-block" role="button"asp-controller="Tarefas" asp-route-id="@Model.IdTarefa" asp-action="Apagar">Apagar</a>
+<a class="btn btn-outline-secondary btn-block" role="button" asp-controller="Tarefas" asp-action="Index">Cancelar </a>
 
 

@@ -24,19 +24,21 @@ namespace ProjetoPastelaria.Helpers
             //se a string for vazia ou nul  return null
             if (string.IsNullOrEmpty(sessaoUsuario)) return null;
 
+            //deserializa  a string JSon de volta pra obj funcionaromodel e o retorna 
             return JsonConvert.DeserializeObject<FuncionarioModel>(sessaoUsuario);
         }
 
         public void CriarSessaoDoUsuario(FuncionarioModel funcionario)
         {
+            //serializando o objeto funcionariomodel pra uma string Json
             string valor = JsonConvert.SerializeObject(funcionario);
 
-            //SETAR UMA STRING PRA SESSAO ela recebe uma chave e um valor 
+            //SETAR UMA STRING PRA SESSAO ela recebe uma chave e um valor JSon do funcionario
             _httpContext.HttpContext.Session.SetString("sessaoUsuarioLogado", valor);
         }
 
         public void RemoverSessaoDoUsuario()
-        {
+        {//remove a string da sessao com a chave sessaousuariologado
             _httpContext.HttpContext.Session.Remove("sessaoUsuarioLogado");
         }
     }

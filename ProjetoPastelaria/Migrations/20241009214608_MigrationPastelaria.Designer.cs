@@ -10,8 +10,8 @@ using ProjetoPastelaria.Data;
 namespace ProjetoPastelaria.Migrations
 {
     [DbContext(typeof(BancoContext))]
-    [Migration("20241008010306_AdicionadoTblTarefas")]
-    partial class AdicionadoTblTarefas
+    [Migration("20241009214608_MigrationPastelaria")]
+    partial class MigrationPastelaria
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,9 +88,6 @@ namespace ProjetoPastelaria.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FuncionarioModelIdFuncionario")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdCriadorTarefa")
                         .HasColumnType("int");
 
@@ -103,7 +100,7 @@ namespace ProjetoPastelaria.Migrations
 
                     b.HasKey("IdTarefa");
 
-                    b.HasIndex("FuncionarioModelIdFuncionario");
+                    b.HasIndex("IdFuncionario");
 
                     b.ToTable("Tarefas");
                 });
@@ -112,7 +109,9 @@ namespace ProjetoPastelaria.Migrations
                 {
                     b.HasOne("ProjetoPastelaria.Models.FuncionarioModel", null)
                         .WithMany("Tarefas")
-                        .HasForeignKey("FuncionarioModelIdFuncionario");
+                        .HasForeignKey("IdFuncionario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjetoPastelaria.Models.FuncionarioModel", b =>

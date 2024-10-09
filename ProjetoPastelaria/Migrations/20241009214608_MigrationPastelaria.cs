@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjetoPastelaria.Migrations
 {
-    public partial class AdicionadoTblTarefas : Migration
+    public partial class MigrationPastelaria : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,14 +13,14 @@ namespace ProjetoPastelaria.Migrations
                 {
                     IdFuncionario = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     DataNasc = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TelFixo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Celular = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Endereco = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TelFixo = table.Column<string>(type: "varchar(13)", nullable: false),
+                    Celular = table.Column<string>(type: "varchar(13)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Endereco = table.Column<string>(type: "varchar(100)", nullable: false),
                     Perfil = table.Column<int>(type: "int", nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Senha = table.Column<string>(type: "varchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,7 +32,7 @@ namespace ProjetoPastelaria.Migrations
                 columns: table => new
                 {
                     Disabled = table.Column<bool>(type: "bit", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "varchar(50)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -45,27 +45,26 @@ namespace ProjetoPastelaria.Migrations
                     IdTarefa = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdFuncionario = table.Column<int>(type: "int", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PrazoConclusao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdCriadorTarefa = table.Column<int>(type: "int", nullable: false),
-                    FuncionarioModelIdFuncionario = table.Column<int>(type: "int", nullable: true)
+                    IdCriadorTarefa = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tarefas", x => x.IdTarefa);
                     table.ForeignKey(
-                        name: "FK_Tarefas_Funcionarios_FuncionarioModelIdFuncionario",
-                        column: x => x.FuncionarioModelIdFuncionario,
+                        name: "FK_Tarefas_Funcionarios_IdFuncionario",
+                        column: x => x.IdFuncionario,
                         principalTable: "Funcionarios",
                         principalColumn: "IdFuncionario",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tarefas_FuncionarioModelIdFuncionario",
+                name: "IX_Tarefas_IdFuncionario",
                 table: "Tarefas",
-                column: "FuncionarioModelIdFuncionario");
+                column: "IdFuncionario");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

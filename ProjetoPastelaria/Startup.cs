@@ -25,16 +25,20 @@ namespace ProjetoPastelaria
         //atraves desse cara configuration consigo pegar tudo que esta dentro de appsettings
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        //adicionar servicos ao container
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();//suporte pra controladores e as view
             //setar aqui pra que conheça o caminho do bd e falar qual o context e qual o db context
             //ou seja vou usar sqlserver o contexto que vou mandar e o bancocontext e adicionar a string de conexão no appsettings.json
-            services.AddEntityFrameworkSqlServer()
+
+            services.AddEntityFrameworkSqlServer() //configuracao do bando de dados
                 //sistema lamba e use sql server e dentro espera uma string conection o get ´pra pegar a conceton e o nome dela
+
                 .AddDbContext<BancoContext>(o =>o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
-            //toda vez que a injeção de dependencia  IFuncionarioRepositorio for chamada vai resolver vai usar tudo  de funcionariorepositorio
+
+
+            //toda vez que a injeção de dependencia  IFuncionarioRepositorio for chamada vai resolver vai usar tudo  da parte generica
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IFuncionarioRepositorio, FuncionarioRepositorio>();
@@ -42,16 +46,16 @@ namespace ProjetoPastelaria
             services.AddScoped<ITarefasRepositorio, TarefasRepositorio>();
             services.AddScoped<IEmail, Email>();
 
-            //adicionando sessao
-            services.AddSession(o =>
+            //adicionando sessao estudar como isso funciona depois
+            //config da  sessao
+            services.AddSession(o =>//suporte pra sessao
             {
-                o.Cookie.HttpOnly = true;
-                o.Cookie.IsEssential = true;
+                o.Cookie.HttpOnly = true; //cookie da sessao como http only
+                o.Cookie.IsEssential = true; //essencial para o app
             });
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -62,17 +66,17 @@ namespace ProjetoPastelaria
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.UseStaticFiles();
+            app.UseStaticFiles();//permite arquivos estaticos
 
-            app.UseRouting();
+            app.UseRouting();//permite roteamento
 
-            app.UseAuthorization();
+            app.UseAuthorization(); //add  um middleware de atuorizacao
             //usar sesseion
             app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
+                endpoints.MapControllerRoute(//rota que sera seguida
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}/{id?}");
             });

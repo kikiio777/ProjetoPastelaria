@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace ProjetoPastelaria.Controllers
 {
+    //pagina admin usado para especificar que somente o user admin tem acesso a ela
     [PaginaAdmin]
 
     public class FuncionariosController : Controller
@@ -17,7 +18,8 @@ namespace ProjetoPastelaria.Controllers
         {
             _funcionarioRepositorio = funcionarioRepositorio;
         }
-        //quando nao estiver informando o time sao metodos get automaticamente servem so pra pegar algo
+        // aqui esta buscando todos os funcionarios atraves do  BuscarTodos
+        // e enviando pra uma lista de funcionarios
         public IActionResult Index()
         {
            List<FuncionarioModel>funcionarios = _funcionarioRepositorio.BuscarTodos();
@@ -29,12 +31,15 @@ namespace ProjetoPastelaria.Controllers
         }
         public IActionResult Editar(int id)
         {
+            //editar com parametro int id 
+            //aqui estou buscando um funcionario pelo id dele e atribindo ao funcionario volando para a view 
             FuncionarioModel funcionario = _funcionarioRepositorio.ListarPorId(id);
             return View(funcionario);
         }
         public IActionResult ApagarConfirmacao(int id)
         {
             //buscando pelo id
+            //para confirmar se ele sera apagado
             FuncionarioModel funcionario = _funcionarioRepositorio.ListarPorId(id);
             return View(funcionario);
            
@@ -44,6 +49,7 @@ namespace ProjetoPastelaria.Controllers
             try
             {
               bool apagado = _funcionarioRepositorio.Apagar(id);
+                //se apagado mostra o tempdata de sucesso senao mostra de erro e volta pra index
 
                 if(apagado)
                 {
@@ -74,11 +80,10 @@ namespace ProjetoPastelaria.Controllers
         //pos ja serve pra atualizar  receber e cadastrar ai esse criar vai pegar dados de funcionariomodel 
         public IActionResult Alterar(FuncionarioModel funcionario)
         {
-            //if (!ModelState.IsValid)
-            // {
+            //atualizando o funcionario e voltando para a index
             _funcionarioRepositorio.Atualizar(funcionario);
             return RedirectToAction("Index");
-            // }     
+                
 
         }
     }

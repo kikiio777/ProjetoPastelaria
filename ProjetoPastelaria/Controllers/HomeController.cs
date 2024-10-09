@@ -15,6 +15,7 @@ namespace ProjetoPastelaria.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        //usado para registrar msgs de erroaviso e outras
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;

@@ -11,7 +11,7 @@
         if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.Admin.ToString())
         {
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <a class="btn btn-primary" role="button" asp-controller="Tarefas" asp-action="Criar">Cadastrar</a>
+                <a class="btn btn-outline-primary" role="button" asp-controller="Tarefas" asp-action="Criar">Cadastrar</a>
             </div>}
     }
     <br />
@@ -62,15 +62,15 @@
 
                                     if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.Admin.ToString())
                                     {
-                                        <a role="button" class="btn btn-secondary" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="Editar">Editar</a>
-                                        <a role="button" class="btn btn-danger" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="ApagarConfirmacao">Apagar</a>
+                                        <a role="button"class="btn btn-outline-secondary" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="Editar">Editar</a>
+                                        <a role="button" class="btn btn-outline-danger" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="ApagarConfirmacao">Apagar</a>
                                     }
                                     else if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.padrao.ToString())
                                     {
                                         @using (Html.BeginForm("Concluir", "Tarefas", FormMethod.Post))
                                         {
                                             @Html.Hidden("id", tarefas.IdTarefa)
-                                            <button type="submit" class="btn btn-success">Concluir</button>
+                                            <button type="submit" class="btn btn-outline-success">Concluir</button>
                                         }
                                     }
                                 }

@@ -40,10 +40,12 @@ namespace ProjetoPastelaria.Controllers
                 //se valido entre no sistemaa
                 if(ModelState.IsValid)
                 {
+                    //buscando o func pelo email iformado no modllogin
                    FuncionarioModel  funcionario =  _funcionarioRepositorio.BuscarPLogin(loginmodel.Email);
-
+                    //se ele existir 
                     if(funcionario != null)
                     {
+                        // se a senha for valida vai entrar aqui no if
                      if(funcionario.SenhaValida(loginmodel.Senha))
                         {//criando sessao do usuario como paramentro o usuario que esta sendo logado
                             _sessao.CriarSessaoDoUsuario(funcionario);
