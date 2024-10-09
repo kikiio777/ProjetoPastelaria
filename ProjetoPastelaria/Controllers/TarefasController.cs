@@ -35,16 +35,40 @@ namespace ProjetoPastelaria.Controllers
         //INDEX
         // INDEX
         // INDEX
+        // INDEX
+        // INDEX
         public IActionResult Index()
         {
             string sessaoUsuario = HttpContext.Session.GetString("sessaoUsuarioLogado");
             FuncionarioModel funcionario = JsonConvert.DeserializeObject<FuncionarioModel>(sessaoUsuario);
             ViewBag.PerfilUsuarioLogado = funcionario?.Perfil;
 
-            // Filtra as tarefas apenas para o funcionário logado
-            var tarefas = _context.Tarefas
-                                  .Where(t => t.IdFuncionario == funcionario.IdFuncionario) // Filtra pelas tarefas atribuídas ao funcionário
-                                  .ToList();
+            List<TarefasModel> tarefas;
+
+            // Verifica se o funcionário está logado
+            if (funcionario != null)
+            {
+                // Verifica o perfil do usuário
+                if (funcionario.Perfil == ProjetoPastelaria.Enum.PerfilEnum.Admin)
+                {
+                    // Para Admin, retorna todas as tarefas
+                    tarefas = _context.Tarefas.ToList();
+                }
+                else
+                {
+                    // Para usuários padrão, retorna apenas as tarefas atribuídas ao usuário logado
+                    tarefas = _context.Tarefas
+                                      .Where(t => t.IdFuncionario == funcionario.IdFuncionario)
+                                      .ToList();
+                }
+            }
+            else
+            {
+                // Se não houver um funcionário logado, retorne uma lista vazia ou redirecione
+                tarefas = new List<TarefasModel>();
+                // ou você pode redirecionar para uma página de erro ou de login
+                // return RedirectToAction("Login", "Account");
+            }
 
             var funcionarios = _context.Funcionarios.ToList(); // Obtém a lista de funcionários
 
@@ -54,6 +78,8 @@ namespace ProjetoPastelaria.Controllers
             ViewBag.FuncionarioDict = funcionarioDict; // Passar o dicionário para a view
             return View(tarefas);
         }
+
+
 
 
 
