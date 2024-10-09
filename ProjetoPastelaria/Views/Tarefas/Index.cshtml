@@ -13,7 +13,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                 <a class="btn btn-primary" role="button" asp-controller="Tarefas" asp-action="Criar">Cadastrar</a>
             </div>}
-         }
+    }
     <br />
     @if (TempData["MensagemSucesso"] != null)
     {
@@ -37,11 +37,12 @@
     <table class="table" id="table-tarefas">
         <thead>
             <tr>
-                <th scope="col">Descricao</th>
-                <th scope="col">DataCriacao</th>
-                <th scope="col">PrazoConclusao</th>
-                <th scope="col">TotalTarefas</th>
-                <th scope="col"></th>
+                <th scope="col">Funcionário</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Data de Criação</th>
+                <th scope="col">Prazo de Conclusão</th>
+                <th scope="col">Total de Tarefas</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -50,30 +51,33 @@
                 foreach (TarefasModel tarefas in Model)
                 {
                     <tr>
+                        <td scope="row">@ViewBag.FuncionarioDict[tarefas.IdFuncionario]</td> <!-- Mostra o nome do funcionário -->
                         <td scope="row">@tarefas.Descricao</td>
-                        <td scope="row">@tarefas.DataCriacao</td>
-                        <td scope="row">@tarefas.PrazoConclusao</td>
+                        <td scope="row">@tarefas.DataCriacao.ToString("dd/MM/yyyy")</td> <!-- Formata a data -->
+                        <td scope="row">@tarefas.PrazoConclusao?.ToString("dd/MM/yyyy")</td> <!-- Formata a data com Nullable -->
                         <td>
                             <a href="javascript:" class="btn btn-success btn-sm btn-total-tarefas">10</a>
                         </td>
                         <td>
                             <div class="btn-group" role="group">
-                                @* Aqui, verifique o perfil do usuário *@
                                 @if (ViewBag.PerfilUsuarioLogado != null)
                                 {
                                     var perfilUsuario = ViewBag.PerfilUsuarioLogado.ToString();
 
                                     if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.Admin.ToString())
-                                    {@* Botões visíveis apenas para Admin *@
-                                    <a role="button" class="btn btn-secondary" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="Editar">Editar</a>
-                                    <a role="button" class="btn btn-danger" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="ApagarConfirmacao">Apagar</a> }
-                                else if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.padrao.ToString())
-                                { @* Form para concluir a tarefa *@
-                                @using (Html.BeginForm("Concluir", "Tarefas", FormMethod.Post))
-                                {
-                                    @Html.Hidden("id", tarefas.IdTarefa)
-                                    <button type="submit" class="btn btn-success">Concluir</button>}}
-                        }
+                                    {
+                                        <a role="button" class="btn btn-secondary" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="Editar">Editar</a>
+                                        <a role="button" class="btn btn-danger" asp-route-id="@tarefas.IdTarefa" asp-controller="Tarefas" asp-action="ApagarConfirmacao">Apagar</a>
+                                    }
+                                    else if (perfilUsuario == ProjetoPastelaria.Enum.PerfilEnum.padrao.ToString())
+                                    {
+                                        @using (Html.BeginForm("Concluir", "Tarefas", FormMethod.Post))
+                                        {
+                                            @Html.Hidden("id", tarefas.IdTarefa)
+                                            <button type="submit" class="btn btn-success">Concluir</button>
+                                        }
+                                    }
+                                }
                             </div>
                         </td>
                     </tr>
@@ -85,4 +89,5 @@
             }
         </tbody>
     </table>
+
 </div>

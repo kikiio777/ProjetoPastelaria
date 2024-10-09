@@ -15,6 +15,13 @@ namespace ProjetoPastelaria.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<TarefasModel>()
+            .HasOne<FuncionarioModel>()
+            .WithMany(f => f.Tarefas)
+            .HasForeignKey(t => t.IdFuncionario)
+            .OnDelete(DeleteBehavior.Cascade); // Define o comportamento de exclusão
+
             modelBuilder.Entity<SelectListGroup>().HasNoKey();
             base.OnModelCreating(modelBuilder);
         }

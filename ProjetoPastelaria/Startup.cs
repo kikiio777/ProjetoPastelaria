@@ -40,6 +40,8 @@ namespace ProjetoPastelaria
             services.AddScoped<IFuncionarioRepositorio, FuncionarioRepositorio>();
             services.AddScoped<ISessao, Sessao>();
             services.AddScoped<ITarefasRepositorio, TarefasRepositorio>();
+            services.AddScoped<IEmail, Email>();
+
             //adicionando sessao
             services.AddSession(o =>
             {

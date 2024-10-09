@@ -11,7 +11,7 @@ namespace ProjetoPastelaria.ViewComponents
 {
     public class Menu : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync()
+        public IViewComponentResult Invoke()
         {
             string sessaoUsuario = HttpContext.Session.GetString("sessaoUsuarioLogado");
 

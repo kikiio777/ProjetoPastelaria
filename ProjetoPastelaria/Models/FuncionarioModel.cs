@@ -37,7 +37,7 @@ namespace ProjetoPastelaria.Models
         [Required(ErrorMessage = "Digite uma Senha!")]
         public string Senha { get; set; }
 
-        // Relação 1:N com Tarefas
+        // Relaçãoo funcionario tera  uma coleçao de tarefas
         public virtual ICollection<TarefasModel> Tarefas { get; set; } = new List<TarefasModel>();
 
         //metodo pra validar senha  se a Senha que foi criada do usuario for igual a digitada para o acesso return true
